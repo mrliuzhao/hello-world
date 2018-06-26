@@ -1095,132 +1095,11 @@ Response:
 
 -----------------------------------------------------
 
-## 7. 文件导入查询的相关操作
-
-### 7.1 查询导入的文件
-
-```
-POST /file/search
-
-Content-Type:   application/x-www-form-urlencoded
-Accept:         application/json
-
-Body：
-    q:要搜索文件名    string,必需
-    startDate:查询时间范围的起始时间  string，可选
-    endDate:查询时间范围的截止时间    string，可选
-    size:返回结果条数 int，可选 默认7
-    offset:结果偏移量   int，可选 默认0
-    fileSize:要搜索的文件大小 string，可选
-
-Response:
-    {
-        "code": 0,
-        "elements": [  //查询到的文件的信息
-            {
-                "creator": "admin", //该文件的上传者
-                "fileSize": "28.4MB", //该文件的大小
-                "uploadedTime": 1527481194340, //该文件上传的时间
-                "name": "gdelt-523- 1610.np", //该文件的名称
-                "id": "f296ef77ba0146a0871e64508d995f74"  //该上传文件的id
-            }
-        ],
-        "nextOffset": 7,  //下次查询的offset
-        "itemCount": 1  //查询到的文件数量
-    }
-```
-<br/>
-
------------------------------------------------------
-
-## 8. visibility
-
-可见性管理相关操作
-
-### 8.1 新建或者修改可见性名称
-
-```
-POST /visibility/update
-
-Content-Type:   application/x-www-form-urlencoded
-Accept:         application/json
-
-Body：
-    username：需要添加的用户  string，必需
-    auth：可见性名称  string，必需
-
-Response:
-    {
-        "code":0,
-        "creator": "admin", //创建者
-        "name": "test3", //可见性名称
-        "count": 2, //授权用户数
-        "createdTime": 1529033527016, //创建时间
-        "id": "e584e405ea144db98d59fa4953b0a032", //该可见性id
-        "users": "admin,sys" //授权的用户
-    }
-```
-<br/>
-
-### 8.2 查询可见性名称
-
-```
-POST /visibility/search
-
-Content-Type:   application/x-www-form-urlencoded
-Accept:         application/json
-
-Body：
-    q: 搜索可见性名称（可模糊查询）   string，必需
-    startDate: 要查询的创建的起始时间 string，可选
-    endDate: 要查询的创建的截止时间   string，可选
-    count: 授权用户数量   string，可选
-    offset: 查询的结果集偏移  int，可选  默认0
-    size: 返回查询结果数  int，可选  默认7
-
-Response:
-    {
-        "code": 0,
-        "elements": [ // 查到的可见性详细信息列表
-            {
-                "creator": "admin", //创建可见性者
-                "name": "测试", //可见性名称
-                "count": 2, //可见性用户个数
-                "createdTime": 1528873779850, //创建该可见性的时间
-                "id": "80c27dfad9134090904d568d28ad00f9", //可见性id
-                "users": "sys,root" //可见性用户
-            },
-        ],
-        "nextOffset": 7, //下一页起始偏移量
-        "itemCount": 2 //返回的元素个数
-    }
-```
-<br/>
-
-### 8.3 删除可见性用户
-
-```
-DELETE /visibility/remove
-
-Accept:         application/json
-
-Body：
-    auth:可见性名称 string，必需
-
-Response:
-    {
-        "code": 0
-    }
-```
-<br/>
-
------------------------------------------------------
-
-## 9. ontology
+## 7. ontology
 
 ontology相关的操作
 
-### 9.1 读取本体(Ontology)信息
+### 7.1 读取本体(Ontology)信息
 
 ```
 GET /ontology/all
@@ -1290,7 +1169,7 @@ Response:
 ```
 <br/>
 
-### 9.2 新建owl实体
+### 7.2 新建owl实体
 
 ```
 POST /ontology/create/concept
@@ -1327,7 +1206,7 @@ Response:
 ```
 <br/>
 
-### 9.3 新建owl关系
+### 7.3 新建owl关系
 
 ```
 POST /ontology/create/relationship
@@ -1362,7 +1241,7 @@ Response:
 ```
 <br/>
 
-### 9.4 新建owl属性
+### 7.4 新建owl属性
 
 ```
 POST /ontology/create/property
@@ -1397,7 +1276,7 @@ Response:
 ```
 <br/>
 
-### 9.5 根据本体实体id查找其详细信息。
+### 7.5 根据本体实体id查找其详细信息。
 
 ```
 GET /ontology/search/concept
@@ -1434,7 +1313,7 @@ Response:
 ```
 <br/>
 
-### 9.6 根据本体关系id查找其详细信息。
+### 7.6 根据本体关系id查找其详细信息。
 
 ```
 GET /ontology/search/relationship
@@ -1470,7 +1349,7 @@ Response:
 ```
 <br/>
 
-### 9.7 根据本体属性id返回查找其详细信息。
+### 7.7 根据本体属性id返回查找其详细信息。
 
 ```
 GET /ontology/search/property
@@ -1504,6 +1383,127 @@ Response:
 ```
 <br/>
 
+-----------------------------------------------------
+
+## 8. 文件导入查询的相关操作
+
+### 8.1 查询导入的文件
+
+```
+POST /file/search
+
+Content-Type:   application/x-www-form-urlencoded
+Accept:         application/json
+
+Body：
+    q:要搜索文件名    string,必需
+    startDate:查询时间范围的起始时间  string，可选
+    endDate:查询时间范围的截止时间    string，可选
+    size:返回结果条数 int，可选 默认7
+    offset:结果偏移量   int，可选 默认0
+    fileSize:要搜索的文件大小 string，可选
+
+Response:
+    {
+        "code": 0,
+        "elements": [  //查询到的文件的信息
+            {
+                "creator": "admin", //该文件的上传者
+                "fileSize": "28.4MB", //该文件的大小
+                "uploadedTime": 1527481194340, //该文件上传的时间
+                "name": "gdelt-523- 1610.np", //该文件的名称
+                "id": "f296ef77ba0146a0871e64508d995f74"  //该上传文件的id
+            }
+        ],
+        "nextOffset": 7,  //下次查询的offset
+        "itemCount": 1  //查询到的文件数量
+    }
+```
+<br/>
+
+-----------------------------------------------------
+
+## 9. visibility
+
+可见性管理相关操作
+
+### 9.1 新建或者修改可见性名称
+
+```
+POST /visibility/update
+
+Content-Type:   application/x-www-form-urlencoded
+Accept:         application/json
+
+Body：
+    username：需要添加的用户  string，必需
+    auth：可见性名称  string，必需
+
+Response:
+    {
+        "code":0,
+        "creator": "admin", //创建者
+        "name": "test3", //可见性名称
+        "count": 2, //授权用户数
+        "createdTime": 1529033527016, //创建时间
+        "id": "e584e405ea144db98d59fa4953b0a032", //该可见性id
+        "users": "admin,sys" //授权的用户
+    }
+```
+<br/>
+
+### 9.2 查询可见性名称
+
+```
+POST /visibility/search
+
+Content-Type:   application/x-www-form-urlencoded
+Accept:         application/json
+
+Body：
+    q: 搜索可见性名称（可模糊查询）   string，必需
+    startDate: 要查询的创建的起始时间 string，可选
+    endDate: 要查询的创建的截止时间   string，可选
+    count: 授权用户数量   string，可选
+    offset: 查询的结果集偏移  int，可选  默认0
+    size: 返回查询结果数  int，可选  默认7
+
+Response:
+    {
+        "code": 0,
+        "elements": [ // 查到的可见性详细信息列表
+            {
+                "creator": "admin", //创建可见性者
+                "name": "测试", //可见性名称
+                "count": 2, //可见性用户个数
+                "createdTime": 1528873779850, //创建该可见性的时间
+                "id": "80c27dfad9134090904d568d28ad00f9", //可见性id
+                "users": "sys,root" //可见性用户
+            },
+        ],
+        "nextOffset": 7, //下一页起始偏移量
+        "itemCount": 2 //返回的元素个数
+    }
+```
+<br/>
+
+### 9.3 删除可见性用户
+
+```
+DELETE /visibility/remove
+
+Accept:         application/json
+
+Body：
+    auth:可见性名称 string，必需
+
+Response:
+    {
+        "code": 0
+    }
+```
+<br/>
+
 --------------------------------------------------------
 
 ## 10. Dashboard
@@ -1513,7 +1513,7 @@ Dashboard相关的操作
 ### 10.1 根据条件获取仪表盘中的通知内容
 
 ```
-POST /newDashboard/all
+POST /notification/all
 
 Content-Type:   application/x-www-form-urlencoded
 Accept:         application/json
