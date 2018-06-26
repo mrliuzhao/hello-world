@@ -23,7 +23,7 @@ Accept:         application/json
 Response:
   {
     "code":0,
-    "workspaces": [ // 工作区列表
+    "workspaces": [ // 工作区列表，按创建时间倒序排序
       {
         "workspaceId": "<string> 工作区ID",
         "title": "<string> 工作区标题",
@@ -171,7 +171,7 @@ Params:
 Response:
   {
     "code":0
-    "products": [ // 该工作区下所有Graph的信息列表
+    "products": [ // 该工作区下所有Graph的信息列表，按创建时间倒序排序
       {
         "id": "<string> GraphCase ID",
         "title": "<string> Graph名称",
@@ -493,6 +493,26 @@ Response:
     "code":0
   }
 ```
+<br/>
+
+### 3.7 查询当前所有实体统计信息
+
+```
+GET /vertex/statistics
+
+Accept:         application/json
+
+Response:
+  {
+    "code":0,
+    "statistics":[ // 具体的各类实体统计信息列表
+      {
+        "conceptType": "<string> 顶点类型（OWL本体）",
+        "count":"<int> 该类型顶点数量"
+      }
+    ]
+  }
+```
 
 ------------------------------------
 
@@ -635,6 +655,26 @@ Response:
     "code":0
   }
 ```
+<br/>
+
+### 4.6 查询当前所有关系的统计信息
+
+```
+GET /edge/statistics
+
+Accept:         application/json
+
+Response:
+  {
+    "code":0,
+    "statistics":[ // 具体的各类关系统计信息列表
+      {
+        "conceptType": "<string> 关系类型（OWL本体）",
+        "count":"<int> 该类型的关系数量"
+      }
+    ]
+  }
+```
 
 ------------------------------------------------
 
@@ -676,8 +716,23 @@ Accept:         application/json
 Body:
   q               查询关键字，必需
   conceptTypes    要查询的顶点类型，可选
-  filter          过滤条件，可选
   order           排序方式，可选
+  filter          过滤条件，可选
+
+order具体形式：JSON格式字符串
+{
+  "<string> OWL格式属性schema":"DESCENDING / ASCENDING"
+}
+filter具体形式：JSON格式字符串
+{
+  "hasProp":["<string> OWL格式的属性schema列表"], // 包含某些属性，可以为空
+  "hasNotProp":["<string> OWL格式的属性schema列表"], // 不包含某些属性，可以为空
+  "contains":[ // 某属性包含某内容列表
+    {
+      "<string> OWL格式的属性schema":"<string> 要过滤的属性内容"
+    }
+  ]
+}
 
 Response:
   {
@@ -699,8 +754,23 @@ Accept:         application/json
 Body:
   q               查询关键字，必需
   conceptTypes    要查询的关系类型，可选
-  filter          过滤条件，可选
   order           排序方式，可选
+  filter          过滤条件，可选
+
+order具体形式：JSON格式字符串
+{
+  "<string> OWL格式属性schema":"DESCENDING / ASCENDING"
+}
+filter具体形式：JSON格式字符串
+{
+  "hasProp":["<string> OWL格式的属性schema列表"], // 包含某些属性，可以为空
+  "hasNotProp":["<string> OWL格式的属性schema列表"], // 不包含某些属性，可以为空
+  "contains":[ // 某属性包含某内容列表
+    {
+      "<string> OWL格式的属性schema":"<string> 要过滤的属性内容"
+    }
+  ]
+}
 
 Response:
   {
